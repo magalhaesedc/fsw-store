@@ -1,7 +1,17 @@
 import Image from "next/image";
 import Categories from "./components/categories";
+import ProductList from "./components/product-list";
+import { prismaClient } from "@/lib/prisma";
 
-export default function Home() {
+export default async function Home() {
+  const deals = await prismaClient.product.findMany({
+    where: {
+      discountPercentage: {
+        gt: 0,
+      },
+    },
+  });
+
   return (
     <div className="p-4">
       <Image
@@ -10,10 +20,12 @@ export default function Home() {
         height={0}
         width={0}
         sizes="100vw"
-        className="w-full h-auto"
+        className="h-auto w-full"
       />
 
-      <Categories/>
+      <Categories />
+
+      <ProductList products={deals} />
     </div>
   );
 }
