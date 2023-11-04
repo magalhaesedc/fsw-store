@@ -21,9 +21,12 @@ const ProductItem = ({ product }: ProductItemProps) => {
           style={{ objectFit: "contain" }}
         />
 
-        <Badge className="absolute left-3 top-3 px-2 py-[2px]">
-          <ArrowDownIcon size={12} /> {product.discountPercentage}%
-        </Badge>
+        {product.discountPercentage > 0 && (
+          <Badge className="absolute left-3 top-3 px-2 py-[2px]">
+            <ArrowDownIcon size={12} /> {product.discountPercentage}%
+          </Badge>
+        )}
+        
       </div>
       <div className="pt-2">
         <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm">
@@ -33,17 +36,13 @@ const ProductItem = ({ product }: ProductItemProps) => {
       <div className="flex items-center gap-2">
         {product.discountPercentage > 0 ? (
           <>
-            <p className="font-semibold">
-              R$ {product.totalPrice.toFixed(2)}
-            </p>
+            <p className="font-semibold">R$ {product.totalPrice.toFixed(2)}</p>
             <p className="text-xs line-through opacity-75">
               R$ {product.basePrice.toFixed(2)}
             </p>
           </>
         ) : (
-          <p className="font-semibold">
-            R$ {product.basePrice.toFixed(2)}
-          </p>
+          <p className="font-semibold">R$ {product.basePrice.toFixed(2)}</p>
         )}
       </div>
     </div>
