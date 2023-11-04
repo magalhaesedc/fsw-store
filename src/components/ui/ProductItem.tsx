@@ -9,7 +9,7 @@ interface ProductItemProps {
 
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
-    <div className="flex max-w-[156px] flex-col gap-4">
+    <div className="flex max-w-[156px] flex-col">
       <div className="relative flex h-[170px] w-[156px] items-center justify-center rounded-lg bg-accent">
         <Image
           src={product.imageUrls[0]}
@@ -25,7 +25,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           <ArrowDownIcon size={12} /> {product.discountPercentage}%
         </Badge>
       </div>
-      <div>
+      <div className="pt-2">
         <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm">
           {product.name}
         </p>
