@@ -16,8 +16,8 @@ const ProductImage = ({ name, imageUrls }: ProductImageProps) => {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="flex h-[380px] w-full items-center justify-center bg-accent">
+    <div className="flex flex-col bg-accent">
+      <div className="flex h-[380px] w-full items-center justify-center">
         <Image
           src={currentImage}
           alt={name}
@@ -28,7 +28,7 @@ const ProductImage = ({ name, imageUrls }: ProductImageProps) => {
           style={{ objectFit: "contain" }}
         />
       </div>
-      <div className="mt-8 grid grid-cols-4 gap-4">
+      <div className="pt-5 grid grid-cols-4 gap-4 px-5 bg-background rounded-tr-2xl rounded-tl-2xl">
         {imageUrls.map((imageUrl) => (
           <div
             key={imageUrl}

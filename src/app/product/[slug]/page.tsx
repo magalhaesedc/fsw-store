@@ -38,10 +38,10 @@ const ProductDetailsPage = async ({
   }
 
   return (
-    <div className="flex flex-col gap-8 p-5">
+    <div className="flex flex-col gap-8">
       <ProductImage imageUrls={product.imageUrls} name={product.name} />
       <ProductInfo product={computeProductTotalPrice(product)} />
-      <div>
+      <div className="p-5">
         <SectionTitle>Produtos Recomendados</SectionTitle>
         <ProductList products={product.category.products} />
       </div>
