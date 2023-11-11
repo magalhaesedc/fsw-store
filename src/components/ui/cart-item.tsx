@@ -9,8 +9,11 @@ interface CartItemProps {
 }
 
 const CartItem = ({ product }: CartItemProps) => {
-  const { decreaseProductQuantity, increaseProductQuantity, removeProductFromCart } =
-    useContext(CartContext);
+  const {
+    decreaseProductQuantity,
+    increaseProductQuantity,
+    removeProductFromCart,
+  } = useContext(CartContext);
 
   const handledecreaseProductQuantityClick = () => {
     decreaseProductQuantity(product.id);
@@ -39,8 +42,10 @@ const CartItem = ({ product }: CartItemProps) => {
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          <p className="text-xs">{product.name}</p>
+        <div className="flex flex-col gap-1 ">
+          <p className="text-xs">
+            {product.name}
+          </p>
           <div className="flex items-center gap-2">
             <p className="text-sm font-bold">
               R$ {product.totalPrice.toFixed(2)}
@@ -74,7 +79,7 @@ const CartItem = ({ product }: CartItemProps) => {
           </div>
         </div>
       </div>
-      <Button size="icon" variant="outline" onClick={handRemoveProductClick}>
+      <Button size="icon" className="h-7 w-7" variant="outline" onClick={handRemoveProductClick}>
         <TrashIcon size={16} />
       </Button>
     </div>
