@@ -39,7 +39,7 @@ const CartItem = ({ product }: CartItemProps) => {
           />
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-1">
           <p className="text-xs">{product.name}</p>
           <div className="flex items-center gap-2">
             <p className="text-sm font-bold">
@@ -51,14 +51,14 @@ const CartItem = ({ product }: CartItemProps) => {
               </p>
             )}
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <Button
               size="icon"
               variant="outline"
-              className="h-8 w-8"
+              className="h-6 w-6"
               onClick={handledecreaseProductQuantityClick}
             >
-              <ArrowLeftIcon size={16} />
+              <ArrowLeftIcon size={12} />
             </Button>
 
             <span className="text-xs">{product.quantity}</span>
@@ -66,10 +66,10 @@ const CartItem = ({ product }: CartItemProps) => {
             <Button
               size="icon"
               variant="outline"
-              className="h-8 w-8"
+              className="h-6 w-6"
               onClick={handIncreaseProductQuantityClick}
             >
-              <ArrowRightIcon size={16} />
+              <ArrowRightIcon size={12} />
             </Button>
           </div>
         </div>
