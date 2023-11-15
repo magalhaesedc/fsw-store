@@ -43,7 +43,7 @@ const Header = () => {
             <MenuIcon />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left">
+        <SheetContent side="left" className="w-[90%]">
           <SheetHeader className="text-left text-lg font-semibold">
             Menu
           </SheetHeader>
@@ -136,7 +136,7 @@ const Header = () => {
           </Button>
         </SheetTrigger>
 
-        <SheetContent>
+        <SheetContent className="w-[90%]">
           <Cart />
         </SheetContent>
       </Sheet>
