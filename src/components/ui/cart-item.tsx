@@ -37,8 +37,7 @@ const CartItem = ({ product }: CartItemProps) => {
             height={0}
             alt={product.name}
             sizes="100vw"
-            className="h-auto max-h-[70%] w-auto max-w-[80%]"
-            style={{ objectFit: "contain" }}
+            className="h-auto max-h-[70%] w-auto max-w-[80%] object-contain"
           />
         </div>
 

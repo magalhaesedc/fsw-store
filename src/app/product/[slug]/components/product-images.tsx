@@ -24,8 +24,7 @@ const ProductImage = ({ name, imageUrls }: ProductImageProps) => {
           width={0}
           height={0}
           sizes="100vw"
-          className="max-w-80% h-auto max-h-[70%] w-auto"
-          style={{ objectFit: "contain" }}
+          className="max-w-80% h-auto max-h-[70%] w-auto object-contain"
         />
       </div>
       <div className="pt-5 grid grid-cols-4 gap-4 px-5 bg-background rounded-tr-2xl rounded-tl-2xl">
@@ -41,8 +40,7 @@ const ProductImage = ({ name, imageUrls }: ProductImageProps) => {
               width={0}
               height={0}
               sizes="100vw"
-              style={{ objectFit: "contain" }}
-              className="h-auto max-h-[70%] w-auto max-w-[80%]"
+              className="h-auto max-h-[70%] w-auto max-w-[80%] object-contain"
             />
           </div>
         ))}
