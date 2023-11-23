@@ -15,10 +15,7 @@ const DealsPage = async () => {
 
   return (
     <div className="flex flex-col gap-8 p-5">
-      <Badge
-        className="w-fit gap-1 border-2 border-primary px-3 py-[0.375rem] text-base uppercase"
-        variant={"outline"}
-      >
+      <Badge variant={"heading"}>
         <PercentIcon size={16} /> OFERTAS
       </Badge>
 
@@ -27,6 +24,7 @@ const DealsPage = async () => {
           <ProductItem
             key={product.id}
             product={computeProductTotalPrice(product)}
+            className=""
           />
         ))}
       </div>

@@ -19,10 +19,7 @@ const CategoryProductsPage = async ({ params }: any) => {
   return (
     <div className="flex flex-col gap-8 p-5">
       <div>
-        <Badge
-          className="w-fit gap-1 border-2 border-primary px-3 py-[0.375rem] text-base uppercase"
-          variant={"outline"}
-        >
+        <Badge variant={"heading"}>
           {CATEGORY_ITEM[params.slug as keyof typeof CATEGORY_ITEM]}{" "}
           {params.slug}
         </Badge>
@@ -32,6 +29,7 @@ const CategoryProductsPage = async ({ params }: any) => {
           <ProductItem
             product={computeProductTotalPrice(product)}
             key={product.id}
+            className=""
           />
         ))}
       </div>
