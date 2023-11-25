@@ -26,6 +26,7 @@ import Link from "next/link";
 import Cart from "./cart";
 import { useContext } from "react";
 import { CartContext } from "@/providers/cart";
+import { Badge } from "./badge";
 
 const Header = () => {
   const { status, data } = useSession();
@@ -161,9 +162,11 @@ const Header = () => {
         <SheetTrigger asChild>
           <Button size="icon" variant="outline" className="relative">
             {cartQuantityItems > 0 && (
-              <span className="absolute right-[calc(-1.25rem/2)] top-[calc(-1.25rem/2)] flex h-6 w-[1.8rem] items-center justify-center rounded-lg bg-primary text-sm font-bold">
-                {cartQuantityItems > 9 ? '9+' : cartQuantityItems}
-              </span>
+              <Badge
+                className={`absolute right-[calc(-1.25rem/2)] top-[calc(-1.25rem/2)] flex h-6 w-6 items-center justify-center text-xs font-bold`}
+              >
+                {cartQuantityItems > 9 ? "9+" : cartQuantityItems}
+              </Badge>
             )}
             <ShoppingCartIcon />
           </Button>
