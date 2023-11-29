@@ -14,7 +14,7 @@ import { createOrder } from "@/actions/order";
 
 const Cart = () => {
   const { data } = useSession();
-  const { products, subtotal, total, totalDiscount } = useContext(CartContext);
+  const { products, subtotal, total, totalDiscount, clearCart } = useContext(CartContext);
 
   const handleFinishPurchaseClick = async () => {
     if (!data?.user) {
@@ -26,6 +26,8 @@ const Cart = () => {
     const checkout = await createCheckout(products, order.id);
 
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
+
+    clearCart();
 
     stripe?.redirectToCheckout({
       sessionId: checkout.id,

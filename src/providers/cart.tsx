@@ -19,6 +19,7 @@ export interface ICartContext {
   decreaseProductQuantity: (productId: string) => void;
   increaseProductQuantity: (productId: string) => void;
   removeProductFromCart: (productId: string) => void;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext<ICartContext>({
@@ -33,6 +34,7 @@ export const CartContext = createContext<ICartContext>({
   decreaseProductQuantity: () => {},
   increaseProductQuantity: () => {},
   removeProductFromCart: () => {},
+  clearCart: () => {},
 });
 
 const PRODUCTS_STORAGE_KEY = "@fsw-store/products";
@@ -41,16 +43,18 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<CartProduct[]>([]);
 
   useEffect(() => {
-    setProducts(
-      JSON.parse(localStorage.getItem(PRODUCTS_STORAGE_KEY) || "[]"),
-    );
+    setProducts(JSON.parse(localStorage.getItem(PRODUCTS_STORAGE_KEY) || "[]"));
   }, []);
 
   useEffect(() => {
-    if(products.length > 0){
+    if (products.length > 0) {
       localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
     }
   }, [products]);
+
+  const clearCart = () => {
+    setProducts([]);
+  };
 
   const subtotal = useMemo(() => {
     return products.reduce((acc, product) => {
@@ -137,6 +141,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
         decreaseProductQuantity,
         increaseProductQuantity,
         removeProductFromCart,
+        clearCart,
         cartTotalPrice: 0,
         cartBasePrice: 0,
         cartTotalDiscount: 0,
