@@ -36,22 +36,17 @@ export const CartContext = createContext<ICartContext>({
 });
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
-  const getStoredProducts = () => {
-    if (typeof window !== "undefined") {
-      return JSON.parse(
-        localStorage.getItem("@fsw-store/cart-products") || "[]",
-      );
-    }
-  };
-
-  const [products, setProducts] = useState<CartProduct[]>(getStoredProducts());
+  const [products, setProducts] = useState<CartProduct[]>([]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem(
-        "@fsw-store/cart-products",
-        JSON.stringify(products),
-      );
+    setProducts(
+      JSON.parse(localStorage.getItem("@fsw-store/cart-products") || "[]"),
+    );
+  }, []);
+
+  useEffect(() => {
+    if(products.length > 0){
+      localStorage.setItem("@fsw-store/cart-products", JSON.stringify(products));
     }
   }, [products]);
 
