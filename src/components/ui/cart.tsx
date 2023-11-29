@@ -29,6 +29,8 @@ const Cart = () => {
 
     clearCart();
 
+    return;
+
     stripe?.redirectToCheckout({
       sessionId: checkout.id,
     });

@@ -54,6 +54,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const clearCart = () => {
     setProducts([]);
+    localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify([]));
   };
 
   const subtotal = useMemo(() => {
