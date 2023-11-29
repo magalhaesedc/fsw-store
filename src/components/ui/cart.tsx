@@ -9,7 +9,7 @@ import { Button } from "./button";
 import { ScrollArea } from "./scroll-area";
 import { createCheckout } from "@/actions/checkout";
 import { loadStripe } from "@stripe/stripe-js";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { createOrder } from "@/actions/order";
 
 const Cart = () => {
@@ -18,22 +18,14 @@ const Cart = () => {
 
   const handleFinishPurchaseClick = async () => {
     if (!data?.user) {
-      return;
+      await signIn();
     }
-
-    console.log("Apertou no botão");
 
     const order = await createOrder(products, (data?.user as any).id);
 
-    console.log("Order", order);
-
     const checkout = await createCheckout(products, order.id);
 
-    console.log("Checkout:", checkout);
-
     const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
-
-    console.log("Stripe", stripe);
 
     stripe?.redirectToCheckout({
       sessionId: checkout.id,
