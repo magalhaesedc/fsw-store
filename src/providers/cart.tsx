@@ -35,18 +35,20 @@ export const CartContext = createContext<ICartContext>({
   removeProductFromCart: () => {},
 });
 
+const PRODUCTS_STORAGE_KEY = "@fsw-store/products";
+
 const CartProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<CartProduct[]>([]);
 
   useEffect(() => {
     setProducts(
-      JSON.parse(localStorage.getItem("@fsw-store/cart-products") || "[]"),
+      JSON.parse(localStorage.getItem(PRODUCTS_STORAGE_KEY) || "[]"),
     );
   }, []);
 
   useEffect(() => {
     if(products.length > 0){
-      localStorage.setItem("@fsw-store/cart-products", JSON.stringify(products));
+      localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
     }
   }, [products]);
 
