@@ -30,27 +30,27 @@ const OrderPage = async () => {
     },
   });
 
+  if (orders.length < 1) {
+    return (
+      <div className="flex h-full flex-col items-center justify-center gap-2 p-5">
+        <h2 className="font-bold">Ainda não há pedidos!</h2>
+        <p className="text-center text-sm opacity-60">
+          Assim que concluir suas compras, seus pedidos serão apresentados aqui.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-8  p-5">
       <Badge variant={"heading"}>
         <PackageSearchIcon size={16} /> Meus Pedidos
       </Badge>
-
-      {orders.length > 0 ? (
-        <div className="flex flex-col gap-5">
-          {orders.map((order) => (
-            <OrderItem key={order.id} order={order} />
-          ))}
-        </div>
-      ) : (
-        <div className="flex flex-col items-center justify-center gap-2 p-5">
-          <h2 className="font-bold">Ainda não há pedidos!</h2>
-          <p className="text-center text-sm opacity-60">
-            Assim que concluir suas compras, seus pedidos serão apresentados
-            aqui.
-          </p>
-        </div>
-      )}
+      <div className="flex flex-col gap-5">
+        {orders.map((order) => (
+          <OrderItem key={order.id} order={order} />
+        ))}
+      </div>
     </div>
   );
 };
