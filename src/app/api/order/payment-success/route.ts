@@ -15,6 +15,10 @@ export const POST = async (request: Request) => {
 
   const text = await request.text();
 
+  console.log('rqText',text)
+
+  console.log('rqHeaders',request.headers)
+
   const event = stripe.webhooks.constructEvent(
     text,
     signature,
