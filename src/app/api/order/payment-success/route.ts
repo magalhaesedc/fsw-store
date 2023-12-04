@@ -19,6 +19,8 @@ export const POST = async (request: Request) => {
 
   console.log('rqHeaders',request.headers)
 
+  console.log('rqHeaderSignature',request.headers.get("stripe-signature"))
+
   const event = stripe.webhooks.constructEvent(
     text,
     signature,
