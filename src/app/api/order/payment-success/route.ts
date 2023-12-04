@@ -15,39 +15,38 @@ export const POST = async (request: Request) => {
 
   const text = await request.text();
 
-  console.log('rqText',text)
-
-  console.log('rqHeaders',request.headers)
-
-  console.log('rqHeaderSignature',request.headers.get("stripe-signature"))
-
-  const event = stripe.webhooks.constructEvent(
-    text,
-    signature,
-    process.env.STRIPE_WEBHOOK_SECRET_KEY,
-  );
-
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object as any;
-
-    const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
-      event.data.object.id,
-      {
-        expand: ["line_items"],
-      },
+  try {
+    const event = stripe.webhooks.constructEvent(
+      text,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET_KEY,
     );
 
-    const lineItems = sessionWithLineItems.line_items;
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object as any;
 
-    await prismaClient.order.update({
-      where: {
-        id: session.metadata.orderId,
-      },
-      data: {
-        status: "PAYMENT_CONFIRMED",
-      },
-    });
+      const sessionWithLineItems = await stripe.checkout.sessions.retrieve(
+        event.data.object.id,
+        {
+          expand: ["line_items"],
+        },
+      );
+
+      const lineItems = sessionWithLineItems.line_items;
+
+      await prismaClient.order.update({
+        where: {
+          id: session.metadata.orderId,
+        },
+        data: {
+          status: "PAYMENT_CONFIRMED",
+        },
+      });
+    }
+
+    return NextResponse.json({ received: true });
+  } catch (error) {
+    console.error("Erro durante a verificação do webhook:", error);
+    return NextResponse.error();
   }
-
-  return NextResponse.json({ received: true });
 };
