@@ -40,16 +40,19 @@ export const CartContext = createContext<ICartContext>({
 const PRODUCTS_STORAGE_KEY = "@fsw-store/products";
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [products, setProducts] = useState<CartProduct[]>(
-    JSON.parse(
-      (typeof localStorage !== "undefined" &&
-        localStorage.getItem(PRODUCTS_STORAGE_KEY)) ||
-        "[]",
-    ),
-  );
+  const [products, setProducts] = useState<CartProduct[]>([]);
 
   useEffect(() => {
-      localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
+    const localProductsCart = localStorage.getItem(PRODUCTS_STORAGE_KEY);
+    if (localProductsCart) {
+      setProducts(JSON.parse(localProductsCart));
+    }
+  }, []);
+
+  useEffect(() => {
+      setTimeout(() => {
+        localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
+      }, 0);
   }, [products]);
 
   const clearCart = () => {
