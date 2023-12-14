@@ -14,14 +14,14 @@ export const POST = async (request: Request) => {
     return NextResponse.error();
   }
 
-  // const text = await request.text();
+   const text = await request.text();
 
    try {
-  //   const event = stripe.webhooks.constructEvent(
-  //     text,
-  //     signature,
-  //     process.env.STRIPE_WEBHOOK_SECRET_KEY,
-  //   );
+    const event = stripe.webhooks.constructEvent(
+      text,
+      signature,
+      process.env.STRIPE_WEBHOOK_SECRET_KEY,
+    );
 
   //   if (event.type === "checkout.session.completed") {
   //     const session = event.data.object as any;
