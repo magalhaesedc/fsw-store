@@ -2,7 +2,13 @@ import { prismaClient } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+const SK = process.env.STRIPE_SECRET_KEY;
+const WSK = process.env.STRIPE_WEBHOOK_SECRET_KEY;
+
+console.log('STRIPE_SECRET_KEY', SK);
+console.log('STRIPE_WEBHOOK_SECRET_KEY', WSK);
+
+const stripe = new Stripe(SK, {
   apiVersion: "2023-10-16",
 });
 
@@ -18,7 +24,7 @@ export const POST = async (request: Request) => {
   const event = stripe.webhooks.constructEvent(
     text,
     signature,
-    process.env.STRIPE_WEBHOOK_SECRET_KEY,
+    WSK,
   );
 
   if (event.type === "checkout.session.completed") {
